@@ -1,0 +1,51 @@
+{
+  "name": "beast-beats",
+  "version": "1.0.0",
+  "description": "beast-beats RestAPI",
+  "main": "server.js",
+  "scripts": {
+    "start:dev": "nodemon server.js",
+    "start:prod": "cross-env NODE_ENV=production nodemon server.js "
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rentezzy/beast-beats-seller-server.git"
+  },
+  "keywords": [
+    "api"
+  ],
+  "author": "rentezzy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rentezzy/beast-beats-seller-server/issues"
+  },
+  "homepage": "https://github.com/rentezzy/beast-beats-seller-server#readme",
+  "devDependencies": {
+    "@tsconfig/recommended": "^1.0.2",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.35.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "prettier": "^2.8.4"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.0.1",
+    "morgan": "^1.10.0",
+    "validator": "^13.9.0"
+  },
+  "engines": {
+    "node": "v18.13.0",
+    "npm": "8.19.3"
+  }
+}
