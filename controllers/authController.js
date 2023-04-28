@@ -17,15 +17,23 @@ const createSendJWT = catchAsync(async (res, user, code) => {
       Date.now() + process.env.JWT_EXPIRESIN_NUM * 5_184_000_000
     ),
     httpOnly: true,
+    origin: "http://localhost:3000",
   };
-  if (process.env.NODE_ENV === "production") cookie.secure = true;
+  // if (process.env.NODE_ENV === "production") cookie.secure = true;
 
   res.cookie("jwt", token, cookie);
 
   res.status(code).json({
     status: "success",
     data: {
-      user,
+      user: {
+        avatar: user.avatar,
+        email: user.email,
+        name: user.name,
+        role: user.role,
+        username: user.username,
+        _id: user._id,
+      },
     },
   });
 });

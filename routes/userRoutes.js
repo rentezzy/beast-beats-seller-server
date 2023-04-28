@@ -6,7 +6,7 @@ const userRouter = express.Router();
 userRouter.route("/").get(userController.getAllUsers);
 userRouter.route("/signup").post(authController.signUp);
 userRouter.route("/login").post(authController.logIn);
-userRouter.route("/me").get(authController.protect,userController.getMe);
+userRouter.route("/me").get(authController.protect, userController.getMe);
 // userRouter
 //   // .route("/:username") authController.protect, 
 //   // .get(userControllers.getUser)
