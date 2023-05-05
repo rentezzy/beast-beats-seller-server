@@ -20,3 +20,9 @@ exports.getMe = catchAsync(async (req, res) => {
     },
   });
 });
+exports.logOut = catchAsync(async (req, res) => {
+  res.clearCookie("jwt", { path: "/" });
+  res.status(200).json({
+    status: "success",
+  });
+});
