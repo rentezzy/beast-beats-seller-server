@@ -42,7 +42,7 @@ module.exports.signUp = catchAsync(async (req, res, next) => {
   const newUser = new User({
     name: req.body.name,
     username: req.body.username,
-    avatar: req.body.avatar,
+    avatar: "/default",
     email: req.body.email,
     password: req.body.password,
     passwordConfirm: req.body.passwordConfirm,

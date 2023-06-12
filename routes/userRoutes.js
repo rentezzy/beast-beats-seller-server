@@ -6,10 +6,12 @@ const userRouter = express.Router();
 userRouter.route("/").get(userController.getAllUsers);
 userRouter.route("/signup").post(authController.signUp);
 userRouter.route("/login").post(authController.logIn);
-userRouter.route("/logout").delete(authController.protect, userController.logOut);
+userRouter
+  .route("/login")
+  .delete(authController.protect, userController.logOut);
 userRouter.route("/me").get(authController.protect, userController.getMe);
 // userRouter
-//   // .route("/:username") authController.protect, 
+//   // .route("/:username") authController.protect,
 //   // .get(userControllers.getUser)
 //   // .patch(userControllers.updateUser)
 //   // .delete(userControllers.deleteUser);
