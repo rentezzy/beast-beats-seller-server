@@ -104,3 +104,11 @@ module.exports.protect = catchAsync(async (req, res, next) => {
   res.locals.user = user;
   next();
 });
+
+module.exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role))
+      return next(new AppError("No permission to get this.", 403));
+    next();
+  };
+};

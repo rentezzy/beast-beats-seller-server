@@ -5,6 +5,7 @@ const morgan = require("morgan");
 const cors = require("cors");
 const userRoutes = require("./routes/userRoutes");
 const appRoutes = require("./routes/appRoutes");
+const newsPostsRoutes = require("./routes/newsPostsRoutes");
 const AppError = require("./utils/AppError");
 const errorHandler = require("./controllers/errorController");
 
@@ -23,6 +24,8 @@ if (process.env.NODE_ENV === "development") app.use(morgan("tiny"));
 
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/app", appRoutes);
+app.use("/api/v1/news", newsPostsRoutes);
+
 app.use("/api/v1/images", express.static("public"));
 
 app.all("*", (req, res, next) => {
