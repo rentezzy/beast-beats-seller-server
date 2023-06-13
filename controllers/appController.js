@@ -9,12 +9,12 @@ module.exports.initApp = catchAsync(async (req, res) => {
   res.status(200);
 });
 
-module.exports.getTicker = catchAsync(async (req, res) => {
+module.exports.getAppInfo = catchAsync(async (req, res) => {
   const app = await App.findById(process.env.CURRENT_APP_ID);
   res.status(200).json({
     status: "success",
     data: {
-      ticker: app.ticker,
+      app,
     },
   });
 });
