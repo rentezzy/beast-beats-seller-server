@@ -20,12 +20,14 @@ module.exports.getNewsPosts = catchAsync(async (req, res) => {
   const limit = +req.query.limit || 100;
   const skip = (page - 1) * limit;
 
+  const totalCount = await NewsPost.find()
   const result = await NewsPost.find().skip(skip).limit(limit);
 
   res.status(200).json({
     status: "success",
     data: {
       newsPosts: result,
+      totalCount: totalCount.length
     },
   });
 });
