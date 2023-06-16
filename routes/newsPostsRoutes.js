@@ -11,5 +11,8 @@ newsPostsRouter
     newsPostController.createNewsPost
   );
 newsPostsRouter.route("/newsPosts").get(newsPostController.getNewsPosts);
+newsPostsRouter
+  .route("/likePost")
+  .post(authController.protect, newsPostController.toggleLikeNewsPost);
 
 module.exports = newsPostsRouter;
