@@ -4,7 +4,11 @@ const { catchAsync } = require("../utils/catchError");
 const AppError = require("./../utils/AppError");
 
 module.exports.initApp = catchAsync(async (req, res) => {
-  const app = new App({ ticker: "Hi there from backend" });
+  const app = new App({
+    ticker: "only today! 15% discount when buying 3 or more beats.",
+    maxPrice: 0,
+    genres: [],
+  });
   app.save();
   res.status(200);
 });

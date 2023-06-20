@@ -6,8 +6,29 @@ const musicSchema = new mongoose.Schema({
   },
   title: {
     type: String,
+    require: true,
     maxlenght: 20,
     minlenght: 3,
+  },
+  genre: {
+    type: String,
+    require: true,
+    maxlenght: 20,
+    minlenght: 3,
+  },
+  price: {
+    type: Number,
+    require: true,
+    maxlenght: 20,
+    validate: {
+      validator: function (el) {
+        if (el < 0) return false;
+      },
+      message: "Price must be a postive number!",
+    },
+  },
+  listenings: {
+    type: Number,
   },
   published: Date,
 });

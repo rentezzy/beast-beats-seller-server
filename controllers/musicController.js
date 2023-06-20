@@ -1,15 +1,29 @@
 const mongoose = require("mongoose");
 const fs = require("fs");
 const Music = require("../models/musicModel");
+const App = require("../models/appModel");
 const { catchAsync } = require("../utils/catchError");
 const AppError = require("../utils/AppError");
 
 module.exports.createMusic = catchAsync(async (req, res) => {
+  const app = await App.findById(process.env.CURRENT_APP_ID);
+  if (req.body.price > app.maxPrice) {
+    app.maxPrice = req.body.price;
+    await app.save();
+  }
+  if (!app.genres.includes(req.body.genre)) {
+    app.genres.push(req.body.genre);
+    await app.save();
+  }
   const newMusic = new Music({
     authorId: req.user._id,
     title: req.body.title,
+    genre: req.body.genre,
+    price: req.body.price,
+    listenings: 0,
     published: Date.now(),
   });
+  
   await newMusic.save();
   res.status(200).json({
     status: "success",
@@ -18,9 +32,9 @@ module.exports.createMusic = catchAsync(async (req, res) => {
 
 module.exports.streamMusic = catchAsync(async (req, res, next) => {
   const range = req.headers.range;
-    if (!range) {
-      return next(new AppError("Requires Range header1", 400));
-    }
+  if (!range) {
+    return next(new AppError("Requires Range header", 400));
+  }
 
   const audioPath = `${__dirname}/../music/${req.params.id}.mp3`;
   const audioSize = fs.statSync(audioPath).size;
