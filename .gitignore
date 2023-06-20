@@ -2,3 +2,4 @@
 .eslintrc.json
 config.env
 .prettierrc
+/music
