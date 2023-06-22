@@ -23,10 +23,29 @@ module.exports.createMusic = catchAsync(async (req, res) => {
     listenings: 0,
     published: Date.now(),
   });
-  
+
   await newMusic.save();
   res.status(200).json({
     status: "success",
+  });
+});
+
+module.exports.filteredMusic = catchAsync(async (req, res) => {
+  const filters = {};
+  if (req.body.genre !== "all") filters.genre = req.body.genre;
+  if (req.body.author !== "all") filters.authorId = req.body.author;
+  filters.price = {
+    $gte: `${req.body.priceFrom}`,
+    $lte: `${req.body.priceTo}`,
+  };
+
+  const musics = await Music.find(filters);
+
+  res.status(200).json({
+    status: "success",
+    data: {
+      musics,
+    },
   });
 });
 
