@@ -32,19 +32,28 @@ module.exports.createMusic = catchAsync(async (req, res) => {
 
 module.exports.filteredMusic = catchAsync(async (req, res) => {
   const filters = {};
-  if (req.body.genre !== "all") filters.genre = req.body.genre;
-  if (req.body.author !== "all") filters.authorId = req.body.author;
+  const page = +req.query.page || 1;
+  const limit = +req.query.limit || 100;
+  const skip = (page - 1) * limit;
+
+  if (req.query.genre !== "all") filters.genre = req.query.genre;
+  if (req.query.author !== "all") filters.authorId = req.query.author;
   filters.price = {
-    $gte: `${req.body.priceFrom}`,
-    $lte: `${req.body.priceTo}`,
+    $gte: `${req.query.priceFrom}`,
+    $lte: `${req.query.priceTo}`,
   };
 
-  const musics = await Music.find(filters);
+  const totalCount = await Music.find(filters);
+  const musics = await Music.find(filters)
+    .sort({ published: "descending" })
+    .skip(skip)
+    .limit(limit);
 
   res.status(200).json({
     status: "success",
     data: {
       musics,
+      totalCount: totalCount.length,
     },
   });
 });
