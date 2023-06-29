@@ -44,3 +44,18 @@ exports.logOut = catchAsync(async (req, res) => {
     status: "success",
   });
 });
+exports.toggleCart = catchAsync(async (req, res) => {
+  const song = req.params.id;
+  const user = await User.findById(req.user._id);
+  const inCart = user.cart.includes(song);
+  if (inCart) {
+    user.cart.splice(user.cart.indexOf(song), 1);
+    await user.save();
+  } else {
+    user.cart.push(song);
+    await user.save();
+  }
+  res.status(200).json({
+    status: "success",
+  });
+});
