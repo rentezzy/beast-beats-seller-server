@@ -11,10 +11,6 @@ userRouter
   .delete(authController.protect, userController.logOut);
 userRouter.route("/me").get(authController.protect, userController.getMe);
 userRouter.route("/artists").get(userController.getArtists);
-// userRouter
-//   // .route("/:username") authController.protect,
-//   // .get(userControllers.getUser)
-//   // .patch(userControllers.updateUser)
-//   // .delete(userControllers.deleteUser);
+userRouter.route("/user/:id").get(userController.getUser);
 
 module.exports = userRouter;
