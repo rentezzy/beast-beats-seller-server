@@ -30,6 +30,10 @@ const musicSchema = new mongoose.Schema({
   listenings: {
     type: Number,
   },
+  image: {
+    type: String,
+    default: "default.png",
+  },
   published: Date,
 });
 

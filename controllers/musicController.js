@@ -19,7 +19,7 @@ module.exports.createMusic = catchAsync(async (req, res) => {
     authorId: req.user._id,
     title: req.body.title,
     genre: req.body.genre,
-    price: req.body.price,
+    price: +req.body.price,
     listenings: 0,
     published: Date.now(),
   });

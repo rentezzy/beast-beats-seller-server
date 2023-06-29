@@ -58,6 +58,10 @@ let userSchema = new mongoose.Schema({
     default: "user",
     enum: ["admin", "moderator", "artist", "publisher", "user"],
   },
+  cart: {
+    type: [mongoose.ObjectId],
+    default: [],
+  },
   __v: {
     type: Number,
     select: false,
