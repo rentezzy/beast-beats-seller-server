@@ -30,6 +30,16 @@ module.exports.createMusic = catchAsync(async (req, res) => {
   });
 });
 
+module.exports.getMusic = catchAsync(async (req, res) => {
+  const music = await Music.findById(req.params.id);
+  res.status(200).json({
+    status: "success",
+    data: {
+      music,
+    },
+  });
+});
+
 module.exports.filteredMusic = catchAsync(async (req, res) => {
   const filters = {};
   const page = +req.query.page || 1;
