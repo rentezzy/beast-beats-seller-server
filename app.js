@@ -29,6 +29,7 @@ app.use("/api/v1/news", newsPostsRoutes);
 app.use("/api/v1/music", musicRoutes);
 
 app.use("/api/v1/images", express.static("public"));
+app.use("/api/v1/audio", express.static("music"));
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl}`, 404));
