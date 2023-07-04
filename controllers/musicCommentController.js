@@ -4,7 +4,7 @@ const { catchAsync } = require("../utils/catchError");
 
 module.exports.createMusicComment = catchAsync(async (req, res) => {
   const comment = new MusicComment({
-    authorUsername: req.user.username,
+    authorUsername: req.user._id,
     originTo: req.params.id,
     text: req.body.text,
     timestamp: req.body.timeStamp || 0,

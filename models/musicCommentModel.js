@@ -1,10 +1,8 @@
 const mongoose = require("mongoose");
 
 const musicCommentSchema = new mongoose.Schema({
-  authorUsername: {
-    type: String,
-    maxlenght: 16,
-    minlenght: 3,
+  author: {
+    type: mongoose.ObjectId,
   },
   originTo: {
     type: mongoose.ObjectId,
