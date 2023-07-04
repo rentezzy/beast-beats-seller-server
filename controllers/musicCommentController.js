@@ -16,7 +16,7 @@ module.exports.createMusicComment = catchAsync(async (req, res) => {
     status: "success",
   });
 });
-
+// Just for test.
 module.exports.getMusicComments = catchAsync(async (req, res) => {
   const page = +req.query.page || 1;
   const limit = +req.query.limit || 10;
