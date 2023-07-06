@@ -7,7 +7,7 @@ module.exports.createMusicComment = catchAsync(async (req, res) => {
     author: req.user._id,
     originTo: req.params.id,
     text: req.body.text,
-    timestamp: req.body.timeStamp || 0,
+    timestamp: req.body.timestamp || 0,
     published: Date.now(),
     liked: [],
   });
@@ -16,7 +16,6 @@ module.exports.createMusicComment = catchAsync(async (req, res) => {
     status: "success",
   });
 });
-// Just for test.
 module.exports.getMusicComments = catchAsync(async (req, res) => {
   const page = +req.query.page || 1;
   const limit = +req.query.limit || 10;
