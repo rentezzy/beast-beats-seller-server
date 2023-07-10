@@ -9,6 +9,7 @@ const newsPostsRoutes = require("./routes/newsPostsRoutes");
 const musicRoutes = require("./routes/musicRoutes");
 const musicCommentRoutes = require("./routes/musicCommentRoutes");
 const artistRoutes = require("./routes/artistRoutes");
+const artistPostRoutes = require("./routes/artistPostRoutes");
 const AppError = require("./utils/AppError");
 const errorHandler = require("./controllers/errorController");
 
@@ -31,6 +32,7 @@ app.use("/api/v1/news", newsPostsRoutes);
 app.use("/api/v1/music", musicRoutes);
 app.use("/api/v1/musicComment", musicCommentRoutes);
 app.use("/api/v1/artist", artistRoutes);
+app.use("/api/v1/artistPost", artistPostRoutes);
 
 app.use("/api/v1/images", express.static("public"));
 app.use("/api/v1/audio", express.static("music"));

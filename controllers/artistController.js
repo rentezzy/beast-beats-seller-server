@@ -12,8 +12,12 @@ module.exports.createArtist = catchAsync(async (req, res, next) => {
 });
 
 module.exports.getArtist = catchAsync(async (req, res, next) => {
-  const artist = await Artist.find({ user: req.params.id });
-  if (!artist) return next(new AppError("This artist doesn't exists yet", 400));
+  let artist;
+  try {
+    artist = await Artist.find({ user: req.params.id });
+  } catch {
+    return next(new AppError("This artist doesn't exists yet", 400));
+  }
   res.status(200).json({
     status: "success",
     data: {

@@ -7,7 +7,7 @@ let artistSchema = new mongoose.Schema({
   },
   about: {
     type: String,
-    maxlenght: 1000,
+    maxlenght: 800,
     minlenght: 3,
   },
   avatar: {
