@@ -12,22 +12,25 @@ module.exports.createSession = catchAsync(async (req, res, next) => {
     return next(new AppError("Only 10 items per 1 purshache", 400));
   }
 
-  const items = cart.map(async (songId) => {
-    const song = await Music.findById(songId);
-    return {
-      amount: 1,
-      price: song.price,
-      cost: song.price,
-      id: song._id,
-    };
-  });
+  const items = await Promise.all(
+    cart.map(async (songId) => {
+      const song = await Music.findById(songId);
+      return {
+        amount: 1,
+        price: song.price,
+        cost: song.price,
+        id: song._id,
+      };
+    })
+  );
 
-  const totalPrice = items.reduce((summary, item) => (summary += item.cost), 0);
+  const totalPrice = await items.reduce((summary, item) => {
+    return (summary += item.cost);
+  }, 0);
 
   const orderId = req.body.cart.join("/");
 
   //   TODO: Add urls after deploy
-
   const object = {
     version: 3,
     public_key: process.env.PAYMENT_PUBLIC,

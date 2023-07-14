@@ -1,3 +1,4 @@
+const fs = require("fs");
 const { promisify } = require("util");
 const jwt = require("jsonwebtoken");
 const User = require("./../models/userModel");
@@ -48,6 +49,7 @@ module.exports.signUp = catchAsync(async (req, res, next) => {
     passwordConfirm: req.body.passwordConfirm,
   });
   await newUser.save();
+
   newUser.password = undefined;
   newUser.active = undefined;
   newUser.__v = undefined;

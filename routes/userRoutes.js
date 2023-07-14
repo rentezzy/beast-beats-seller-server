@@ -10,6 +10,14 @@ userRouter
   .route("/login")
   .delete(authController.protect, userController.logOut);
 userRouter.route("/me").get(authController.protect, userController.getMe);
+userRouter.patch(
+  "/me",
+  authController.protect,
+  userController.uploadUserPhoto,
+  userController.resizeUserPhoto,
+  userController.updateUser
+);
+
 userRouter.route("/artists").get(userController.getArtists);
 userRouter.route("/user/:id").get(userController.getUser);
 userRouter
