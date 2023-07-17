@@ -18,6 +18,12 @@ userRouter.patch(
   userController.updateUser
 );
 
+userRouter.patch(
+  "/password",
+  authController.protect,
+  authController.updatePassword
+);
+
 userRouter.route("/artists").get(userController.getArtists);
 userRouter.route("/user/:id").get(userController.getUser);
 userRouter
