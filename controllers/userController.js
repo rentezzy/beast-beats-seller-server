@@ -33,7 +33,8 @@ exports.uploadUserPhoto = upload.single("photo");
 exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
   if (!req.file) return next();
 
-  req.file.changed = true;
+  const filename = performance.now();
+  req.file.dbname = filename;
 
   const folderName = `public/img/${req.user._id}`;
 
@@ -44,13 +45,12 @@ exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
   await sharp(req.file.buffer)
     .resize(256, 256)
     .toFormat("png")
-    .toFile(`public/img/${req.user._id}/small.png`);
+    .toFile(`public/img/${req.user._id}/${filename}-small.png`);
 
   await sharp(req.file.buffer)
     .resize(512, 512)
     .toFormat("png")
-    .toFile(`public/img/${req.user._id}/big.png`);
-
+    .toFile(`public/img/${req.user._id}/${filename}-big.png`);
   next();
 });
 
@@ -70,7 +70,7 @@ module.exports.updateUser = catchAsync(async (req, res, next) => {
   }
 
   const filteredBody = filterObj(req.body, "name", "email");
-  if (req.file) filteredBody.avatar = "no-default.png";
+  if (req.file) filteredBody.avatar = req.file.dbname;
 
   const updatedUser = await User.findByIdAndUpdate(req.user.id, filteredBody, {
     new: true,
@@ -84,7 +84,6 @@ module.exports.updateUser = catchAsync(async (req, res, next) => {
 
 module.exports.getUser = catchAsync(async (req, res) => {
   const user = await User.findById(req.params.id);
-  const a = filterObj();
   res.status(200).json({
     status: "success",
     data: {

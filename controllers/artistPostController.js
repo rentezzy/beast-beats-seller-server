@@ -56,7 +56,7 @@ module.exports.toggleLikeArtistPost = catchAsync(async (req, res) => {
 
 module.exports.replyArtistPost = catchAsync(async (req, res, next) => {
   try {
-    await ArtistPost.find({ originTo: req.params.id });
+    await ArtistPost.findById(req.params.id);
   } catch (error) {
     return next(new AppError("This post doesn't exists", 400));
   }

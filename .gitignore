@@ -3,3 +3,4 @@
 config.env
 .prettierrc
 /music
+/public
