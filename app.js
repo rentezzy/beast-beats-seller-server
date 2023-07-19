@@ -20,7 +20,7 @@ app.use(jsonParser);
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: process.env.ORIGIN_USER,
     optionsSuccessStatus: 200,
     credentials: true,
   })
