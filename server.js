@@ -1,7 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const https = require("https");
-const fs = request("fs");
+const fs = require("fs");
 require("dotenv").config({ path: "./config.env" });
 const app = require("./app");
 
