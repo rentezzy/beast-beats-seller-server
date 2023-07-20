@@ -20,7 +20,7 @@ const createSendJWT = catchAsync(async (res, user, code) => {
     httpOnly: true,
     origin: "http://localhost:3000",
   };
-  // if (process.env.NODE_ENV === "production") cookie.secure = true;
+  if (process.env.NODE_ENV === "production") cookie.secure = true;
 
   res.cookie("jwt", token, cookie);
 
