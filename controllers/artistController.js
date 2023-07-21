@@ -27,7 +27,6 @@ exports.uploadArtistPhoto = upload.fields([
 ]);
 
 exports.resizeArtistPhoto = catchAsync(async (req, res, next) => {
-  console.log(req.files);
   if (!req.files) return next();
 
   await sharp(req.files.poster[0].buffer)
