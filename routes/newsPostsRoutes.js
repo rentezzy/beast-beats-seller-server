@@ -7,7 +7,7 @@ newsPostsRouter
   .route("/newsPost")
   .post(
     authController.protect,
-    authController.restrictTo("admin", "moderator", "publisher"),
+    authController.restrictTo("admin", "moderator", "publisher","user"),
     newsPostController.createNewsPost
   );
 newsPostsRouter.route("/newsPosts").get(newsPostController.getNewsPosts);

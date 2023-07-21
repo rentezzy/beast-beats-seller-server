@@ -8,7 +8,10 @@ artistRouter
   .post(
     authController.protect,
     authController.restrictTo("artist"),
-    artistController.createArtist
+    artistController.uploadArtistPhoto,
+    artistController.createArtist,
+    artistController.resizeArtistPhoto,
+    artistController.createArtistFinish
   );
 artistRouter.route("/:id").get(artistController.getArtist);
 artistRouter.route("/").get(artistController.getArtists);
